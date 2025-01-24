@@ -227,9 +227,9 @@ At the very least (necessary to get 85% of this part of the lab)
 you should implement (and create meaningful server-side tests for) the following features:
 
 - List all the todos
-  - [ ] Implement an `api/todos` server-side endpoint, which returns all the to-dos
+  - [X] Implement an `api/todos` server-side endpoint, which returns all the to-dos
 - List a single todo by ID
-  - [ ] Implement an `api/todos/58895985c1849992336c219b` server-side endpoint, which
+  - [X] Implement an `api/todos/58895985c1849992336c219b` server-side endpoint, which
         returns the single todo with the given `_id`. It should return a 404
         (use the Javalin `NotFoundResponse` class) if there is no todo with the
         specified `_id`.
@@ -250,13 +250,32 @@ To get full (100%) credit on this part of the lab you should
 implement (and create meaningful tests for) these additional features:
 
 - Filter todos by owner
-  - [ ] Implement the endpoint `api/todos?owner=Blanche` which returns just the to-dos
+  - [X] Implement the endpoint `api/todos?owner=Blanche` which returns just the to-dos
         owned by Blanche
 - Filter todos by category
-  - [ ] Implement the endpoint `api/todos?category=groceries` which returns just the to-dos
+  - [X] Implement the endpoint `api/todos?category=groceries` which returns just the to-dos
         in the `groceries` category
 - Allow for ordering/sorting of todos by a particular attribute
-  - [ ] Implement the endpoint `api/todos?orderBy=owner` (or `body`, `status`, or `category`)
+  - [ ] Implement the endpoint `api/todos?orderBy=owner` (or `body`, `status`, or `category`)g todos by their status (either complete or incomplete)
+  - [ ] Implement an `api/todos?status=complete` (or `incomplete`) endpoint which lets you
+        filter the todos and only return the complete (or incomplete) ones
+  - [ ] Note that the "database" stores the status as a boolean, but the endpoint uses
+        "complete" and "incomplete". You'll have to implement the (simple) logic that
+        transforms the endpoint "language" into the database terminology.
+- Support searching for todos whose _bodies_ contain a given string
+  - [ ] Implement an `api/todos?contains=banana` endpoint which lets you search for to-dos
+        whose _bodies_ contain (anywhere) the given string (in this case "banana").
+
+To get full (100%) credit on this part of the lab you should
+implement (and create meaningful tests for) these additional features:
+
+- Filter todos by owner
+  - [X] Implement the endpoint `api/todos?owner=Blanche` which returns just the to-dos
+        owned by Blanche
+- Filter todos by category
+  - [X] Implement the endpoint `api/todos?category=groceries` which returns just the to-dos
+        in the `groceries` category
+- Allow for ordering/sorting o
         which sorts the returned to-dos alphabetically by the specified field
 
 For full credit you also need to support arbitrary combinations
@@ -310,21 +329,21 @@ _why_ we'd want to have it.
       following URLs:
 
   - [ ] :question: The page `users`
-    - <http://localhost:4567/users.html>
+    - <http://localhost:4567/users.html> Nothing, because it doesnt work
   - [ ] :question: The page `api/users`
-    - <http://localhost:4567/api/users>
+    - <http://localhost:4567/api/users> Gives us all of the users
   - [ ] :question: The page `api/users?age=25`
-    - <http://localhost:4567/api/users?age=25>
+    - <http://localhost:4567/api/users?age=25> Gives us the users with an age of 25
   - [ ] :question: The page `api/users/588935f5de613130e931ffd5`
-    - <http://localhost:4567/api/users/588935f5de613130e931ffd5>
+    - <http://localhost:4567/api/users/588935f5de613130e931ffd5> Only gives us the user with this ID
 
 :bangbang: Have your project running (see the README), and use these links -- they should actually work and generate results from your server.
 
-- [ ] :question: _6_ What is in the `client` folder? What is the purpose of each of the HTML files there?
+-SKIP NO DO [ ] :question: _6_ What is in the `client` folder? What is the purpose of each of the HTML files there?
 
 - [ ] :question: _7_ Describe what happens when you filter users by age in the client.
 
-  - [ ] What exactly is the request that is sent to the server?
-  - [ ] How does the server react to the request?
-  - [ ] What reply does the database send back to the server?
-  - [ ] What is the response to the client?
+  - [ ] What exactly is the request that is sent to the server? The client sends a request to the server to ask the database for any user with the appropriate age
+  - [ ] How does the server react to the request? The server queries the database with that request
+  - [ ] What reply does the database send back to the server? The database sends the data for all users that match the parameters in the request
+  - [ ] What is the response to the client? The client gets back the raw json of the users that meet the requirements

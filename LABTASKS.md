@@ -227,9 +227,9 @@ At the very least (necessary to get 85% of this part of the lab)
 you should implement (and create meaningful server-side tests for) the following features:
 
 - List all the todos
-  - [ ] Implement an `api/todos` server-side endpoint, which returns all the to-dos
+  - [X] Implement an `api/todos` server-side endpoint, which returns all the to-dos
 - List a single todo by ID
-  - [ ] Implement an `api/todos/58895985c1849992336c219b` server-side endpoint, which
+  - [X] Implement an `api/todos/58895985c1849992336c219b` server-side endpoint, which
         returns the single todo with the given `_id`. It should return a 404
         (use the Javalin `NotFoundResponse` class) if there is no todo with the
         specified `_id`.
@@ -250,10 +250,10 @@ To get full (100%) credit on this part of the lab you should
 implement (and create meaningful tests for) these additional features:
 
 - Filter todos by owner
-  - [ ] Implement the endpoint `api/todos?owner=Blanche` which returns just the to-dos
+  - [X] Implement the endpoint `api/todos?owner=Blanche` which returns just the to-dos
         owned by Blanche
 - Filter todos by category
-  - [ ] Implement the endpoint `api/todos?category=groceries` which returns just the to-dos
+  - [X] Implement the endpoint `api/todos?category=groceries` which returns just the to-dos
         in the `groceries` category
 - Allow for ordering/sorting of todos by a particular attribute
   - [ ] Implement the endpoint `api/todos?orderBy=owner` (or `body`, `status`, or `category`)g todos by their status (either complete or incomplete)
@@ -270,10 +270,10 @@ To get full (100%) credit on this part of the lab you should
 implement (and create meaningful tests for) these additional features:
 
 - Filter todos by owner
-  - [ ] Implement the endpoint `api/todos?owner=Blanche` which returns just the to-dos
+  - [X] Implement the endpoint `api/todos?owner=Blanche` which returns just the to-dos
         owned by Blanche
 - Filter todos by category
-  - [ ] Implement the endpoint `api/todos?category=groceries` which returns just the to-dos
+  - [X] Implement the endpoint `api/todos?category=groceries` which returns just the to-dos
         in the `groceries` category
 - Allow for ordering/sorting o
         which sorts the returned to-dos alphabetically by the specified field

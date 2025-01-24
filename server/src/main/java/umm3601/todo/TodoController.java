@@ -213,7 +213,7 @@ public class TodoController implements Controller {
         server.get(API_TODOS_BY_ID, this::getTodo);
 
         // List todos, filtered using query parameters
-        server.get(API_TODOS, this::getTodo);
+        server.get(API_TODOS, this::getTodos);
 
         // Get the todos, possibly filtered, grouped by company
         //server.get("/api/todosByCompany", this::getUsersGroupedByCompany);

@@ -84,25 +84,29 @@ public class TodoController implements Controller {
     private Bson constructFilter(Context ctx) {
         List<Bson> filters = new ArrayList<>(); // start with an empty list of filters
 
+        // Filter by owner
         if (ctx.queryParamMap().containsKey(OWNER_KEY)) {
             Pattern pattern = Pattern.compile(Pattern.quote(ctx.queryParam(OWNER_KEY)), Pattern.CASE_INSENSITIVE);
             filters.add(regex(OWNER_KEY, pattern));
         }
+        // Filter by body
         if (ctx.queryParamMap().containsKey(BODY_KEY)) {
             Pattern pattern = Pattern.compile(Pattern.quote(ctx.queryParam(BODY_KEY)), Pattern.CASE_INSENSITIVE);
             filters.add(regex(BODY_KEY, pattern));
         }
+        // Filter by category
         if (ctx.queryParamMap().containsKey(CATEGORY_KEY)) {
             Pattern pattern = Pattern.compile(Pattern.quote(ctx.queryParam(CATEGORY_KEY)), Pattern.CASE_INSENSITIVE);
             filters.add(regex(CATEGORY_KEY, pattern));
         }
+        // Filter by status
         if (ctx.queryParamMap().containsKey(STATUS_KEY)) {
             String statusParam = ctx.queryParam(STATUS_KEY);
             boolean status;
             if ("complete".equalsIgnoreCase(statusParam)) {
-          status = true;
+              status = true;
             } else if ("incomplete".equalsIgnoreCase(statusParam)) {
-          status = false;
+              status = false;
             } else {
           throw new BadRequestResponse("Invalid status value: " + statusParam);
             }

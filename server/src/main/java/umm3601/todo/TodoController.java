@@ -26,6 +26,7 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import io.javalin.http.NotFoundResponse;
 import umm3601.Controller;
+import umm3601.user.UserByCompany;
 
 public class TodoController implements Controller {
 
@@ -127,6 +128,43 @@ public class TodoController implements Controller {
         Bson sortingOrder = sortOrder.equals("desc") ?  Sorts.descending(sortBy) : Sorts.ascending(sortBy);
         return sortingOrder;
     }
+
+    public void getTodosGroupedByCategory(Context ctx) {
+    // We'll support sorting the results either by company name (in either `asc` or `desc` order)
+    // or by the number of users in the company (`count`, also in either `asc` or `desc` order).
+    String sortBy = Objects.requireNonNullElse(ctx.queryParam("sortBy"), "_id");
+    if (sortBy.equals("category")) {
+      sortBy = "_id";
+    }
+    String sortOrder = Objects.requireNonNullElse(ctx.queryParam("sortOrder"), "asc");
+    Bson sortingOrder = sortOrder.equals("desc") ?  Sorts.descending(sortBy) : Sorts.ascending(sortBy);
+
+    ArrayList<TodoByCategory> matchingTodos = todoCollection
+      .aggregate(
+        List.of(
+          // Project the fields we want to use in the next step, i.e., the _id, name, and company fields
+          new Document("$project", new Document("_id", 1).append("owner", 1).append("category", 1)),
+          // Group the users by company, and count the number of users in each company
+          new Document("$group", new Document("_id", "$category")
+            // Count the number of users in each company
+            .append("count", new Document("$sum", 1))
+            // Collect the user names and IDs for each user in each company
+            .append("todos", new Document("$push", new Document("_id", "$_id").append("owner", "$owner")))),
+          // Sort the results. Use the `sortby` query param (default "company")
+          // as the field to sort by, and the query param `sortorder` (default
+          // "asc") to specify the sort order.
+          new Document("$sort", sortingOrder)
+        ),
+        // Convert the results of the aggregation pipeline to UserGroupResult objects
+        // (i.e., a list of UserGroupResult objects). It is necessary to have a Java type
+        // to convert the results to, and the JacksonMongoCollection will do this for us.
+        TodoByCategory.class
+      )
+      .into(new ArrayList<>());
+
+    ctx.json(matchingTodos);
+    ctx.status(HttpStatus.OK);
+  }
 
         /**
      * Add a new todo using information from the context
@@ -230,8 +268,8 @@ public class TodoController implements Controller {
         // List todos, filtered using query parameters
         server.get(API_TODOS, this::getTodos);
 
-        // Get the todos, possibly filtered, grouped by company
-        //server.get("/api/todosByCompany", this::getUsersGroupedByCompany);
+        // Get the todos, possibly filtered, grouped by category
+        server.get("/api/todosByCategory", this::getTodosGroupedByCategory);
 
         // Add new todo with the todo info being in the JSON body
         // of the HTTP request

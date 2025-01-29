@@ -237,9 +237,9 @@ you should implement (and create meaningful server-side tests for) the following
   - [ ] Implement an `api/todos?limit=7` API endpoint, which lets you specify the maximum
         number of todos that the server returns.
 - Support filtering todos by their status (either complete or incomplete)
-  - [ ] Implement an `api/todos?status=complete` (or `incomplete`) endpoint which lets you
+  - [X] Implement an `api/todos?status=complete` (or `incomplete`) endpoint which lets you
         filter the todos and only return the complete (or incomplete) ones
-  - [ ] Note that the "database" stores the status as a boolean, but the endpoint uses
+  - [X] Note that the "database" stores the status as a boolean, but the endpoint uses
         "complete" and "incomplete". You'll have to implement the (simple) logic that
         transforms the endpoint "language" into the database terminology.
 - Support searching for todos whose _bodies_ contain a given string
@@ -257,9 +257,9 @@ implement (and create meaningful tests for) these additional features:
         in the `groceries` category
 - Allow for ordering/sorting of todos by a particular attribute
   - [ ] Implement the endpoint `api/todos?orderBy=owner` (or `body`, `status`, or `category`)g todos by their status (either complete or incomplete)
-  - [ ] Implement an `api/todos?status=complete` (or `incomplete`) endpoint which lets you
+  - [X] Implement an `api/todos?status=complete` (or `incomplete`) endpoint which lets you
         filter the todos and only return the complete (or incomplete) ones
-  - [ ] Note that the "database" stores the status as a boolean, but the endpoint uses
+  - [X] Note that the "database" stores the status as a boolean, but the endpoint uses
         "complete" and "incomplete". You'll have to implement the (simple) logic that
         transforms the endpoint "language" into the database terminology.
 - Support searching for todos whose _bodies_ contain a given string
